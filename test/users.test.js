@@ -6,7 +6,6 @@ const User = require('../src/models/userModel');
 const { faker } = require('@faker-js/faker');
 const generateHash = require("../src/utils/argon");
 const passwordRandom = faker.internet.password({ length: 30 }) ;
-const dbName = process.env.DB_NAME;
 
 describe('pruebas de usuarios API', () => {    
     beforeAll(async () => {
@@ -16,7 +15,7 @@ describe('pruebas de usuarios API', () => {
     afterAll(async () => {
         await mongoose.disconnect();
     });
-    
+
     describe('GET /api/usuarios', () => {
         let response;
         beforeEach(async () => {
