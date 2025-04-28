@@ -84,10 +84,20 @@ router.put('/update/:userId', async (req, res) => {
         return res.status(400).json({errList});
     }
 
+    data = {
+        firstname: req.body.firstname,
+        lastName: req.body.lastName,
+        email: req.body.email
+    }
+
+    if (req.body.password) {
+        data.password = await generateHash(req.body.password);
+    }
+
     try {
         const userUpdate = await User.findByIdAndUpdate(
             req.params.userId,
-            req.body,
+            data,
             {new: true},
         );
         res.json(userUpdate);
